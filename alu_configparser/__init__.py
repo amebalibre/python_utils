@@ -8,6 +8,20 @@ from os.path import join
 class Configparser(object):
     """Utility for read a config file."""
 
+    def __get_default_filename():
+        """Config file. Used when not specified a config filename.
+
+        This is a private method.
+        """
+        return 'conf.ini'
+
+    def __init__(self, path='$HOME', fname=__get_default_filename()):
+        """Initialize method."""
+        self.path = expandvars(path or '')
+        self.fname = expandvars(fname or self.__get_default_filename())
+        self.config = configparser.ConfigParser()
+        self.firsttime = True
+
     def get(self):
         """Return the config object."""
         if(self.firsttime):
@@ -25,17 +39,3 @@ class Configparser(object):
     def where_is(self):
         """Return absolute path of config filename."""
         return join(self.path, self.fname)
-
-    def __get_default_filename():
-        """Config file. Used when not specified a config filename.
-
-        This is a private method.
-        """
-        return 'conf.ini'
-
-    def __init__(self, path='$HOME', fname=__get_default_filename()):
-        """Initialize method."""
-        self.path = expandvars(path or '')
-        self.fname = expandvars(fname or self.__get_default_filename())
-        self.config = configparser.ConfigParser()
-        self.firsttime = True
