@@ -1,4 +1,4 @@
-# Conf Module
+# Configparser Module
 
 This module is easy way to use configparser in your project. If you not specify
 path and filename for your config file, then use default configuration (`$HOME/conf.ini`).
